@@ -71,8 +71,16 @@ class MainScreen : Screen {
 
             Spacer(modifier = Modifier.height(30.dp))
 
+            // Ir a Segunda Pantalla
             Button(onClick = { navigator.push(SecondScreen()) }) {
-                Text("Navegando")
+                Text("Ir a Segunda Pantalla")
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Ir a Tercera Pantalla
+            Button(onClick = { navigator.push(ThirdScreen()) }) {
+                Text("Ir a Tercera Pantalla")
             }
         }
     }
@@ -99,7 +107,38 @@ class SecondScreen : Screen {
             Spacer(modifier = Modifier.height(20.dp))
 
             Button(onClick = { navigator.pop() }) {
-                Text("Vamos para atrás")
+                Text("Volver atrás")
+            }
+        }
+    }
+}
+
+class ThirdScreen : Screen {
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Cyan),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Tercera pantalla",
+                fontSize = 20.sp,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Vuelve directamente a MainScreen
+            Button(onClick = {
+                // Limpiamos el stack y vamos a MainScreen
+                navigator.popUntilRoot()
+            }) {
+                Text("Volver a la Primera Pantalla")
             }
         }
     }
